@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepFace Image Swap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6200ee;
+            --secondary-color: #03dac6;
+            --background-color: #f5f5f5;
+            --text-color: #333333;
+            --card-background: #ffffff;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: var(--card-background);
+            border-radius: 16px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        .input-group {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        .file-input-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .file-input-wrapper .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .file-input-wrapper .btn:hover {
+            background-color: #00b3a6;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        button#swapButton {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        button#swapButton:hover {
+            background-color: #3700b3;
+        }
+        #result {
+            margin-top: 30px;
+            text-align: center;
+        }
+        #resultImage {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: var(--primary-color);
+        }
+        .loading:after {
+            content: '...';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+        .preview-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+        .preview-box {
+            width: 48%;
+            aspect-ratio: 1;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .preview-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DeepFace Image Swap</h1>
+        <div class="preview-container">
+            <div class="preview-box" id="sourcePreview">
+                <img src="" alt="Source Preview" style="display: none;">
+            </div>
+            <div class="preview-box" id="targetPreview">
+                <img src="" alt="Target Preview" style="display: none;">
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="sourceImage">Source Image:</label>
+            <div class="file-input-wrapper">
+                <button class="btn">Choose Source Image</button>
+                <input type="file" id="sourceImage" accept="image/*">
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="targetImage">Target Image:</label>
+            <div class="file-input-wrapper">
+                <button class="btn">Choose Target Image</button>
+                <input type="file" id="targetImage" accept="image/*">
+            </div>
+        </div>
+        <div class="checkbox-group">
+            <input type="checkbox" id="fullGenerate">
+            <label for="fullGenerate">Full Generate</label>
+        </div>
+        <button id="swapButton" onclick="swapFace()">Swap Face</button>
+        <div class="loading" id="loading">Processing</div>
+        <div id="result">
+            <img id="resultImage" style="display: none;">
+        </div>
+    </div>
+
+    <script>
+        function previewImage(input, previewId) {
+            const preview = document.querySelector(`#${previewId} img`);
+            const file = input.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        document.getElementById('sourceImage').addEventListener('change', function() {
+            previewImage(this, 'sourcePreview');
+        });
+
+        document.getElementById('targetImage').addEventListener('change', function() {
+            previewImage(this, 'targetPreview');
+        });
+
+        async function swapFace() {
+            const sourceImage = document.getElementById('sourceImage').files[0];
+            const targetImage = document.getElementById('targetImage').files[0];
+            const fullGenerate = document.getElementById('fullGenerate').checked;
+
+            if (!sourceImage || !targetImage) {
+                alert('Please select both source and target images.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('source', sourceImage);
+            formData.append('target', targetImage);
+            formData.append('full_generate', fullGenerate);
+
+            const loading = document.getElementById('loading');
+            const resultImage = document.getElementById('resultImage');
+            const swapButton = document.getElementById('swapButton');
+
+            loading.style.display = 'block';
+            resultImage.style.display = 'none';
+            swapButton.disabled = true;
+
+            try {
+                const response = await fetch('/swap-face/', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const blob = await response.blob();
+                const imageUrl = URL.createObjectURL(blob);
+                resultImage.src = imageUrl;
+                resultImage.style.display = 'block';
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while swapping faces. Please try again.');
+            } finally {
+                loading.style.display = 'none';
+                swapButton.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

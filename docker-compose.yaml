@@ -15,7 +15,7 @@ services:
       - ./utils:/app/utils
       - ./assets:/app/assets
     environment:
-      - MODEL=/app/model/inswapper_128.onnx
+      - MODEL=/app/model/model_swap_face.onnx
       - MODEL_CODEFORMER=/app/src/CodeFormer/CodeFormer/weights/CodeFormer/codeformer.pth
       - FULL_GENERATE=True
       - DIM_EMBD=512
@@ -30,6 +30,8 @@ services:
       - FACE_UPSAMPLE=store_true
       - UPSCALE=1
       - CODEFORMER=0.5
+      - SOURCE_PATH=temp_source.jpg
+      - TARGET_PATH=temp_target.jpg
       - HOST=0.0.0.0
       - PORT=3000
     command: python app.py

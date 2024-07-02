@@ -1,3 +1,3 @@
-# Prejects DeepFace
+# Weights
 
-load model for your
+Put the downloaded pre-trained models to this folder.

@@ -1,6 +1,6 @@
 import os
 
-MODEL = "./model/inswapper_128.onnx"
+MODEL = "./model/model_swap_face.onnx"
 MODEL_CODEFORMER = "./src/CodeFormer/CodeFormer/weights/CodeFormer/codeformer.pth"
 MODEL_PATH = os.path.join(os.path.abspath("./"), MODEL)
 
@@ -20,6 +20,9 @@ FACE_UPSAMPLE="store_true"
 UPSCALE=1
 CODEFORMER=0.5
 
+SOURCE_PATH = "temp_source.jpg"
+TARGET_PATH = "temp_target.jpg"
+
 HOST = "0.0.0.0"
-PORT = 3000
+PORT = 8000
 BASE_URL = f"http://{HOST}:{PORT}/"

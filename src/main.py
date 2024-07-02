@@ -6,9 +6,9 @@ import torch
 import cv2
 import numpy as np
 from PIL import Image
-from swapper import *
-from restoration import *
-from config import *
+from src.swapper import *
+from src.restoration import *
+from src.config import *
 
 class FaceSwapper:
     def __init__(self):
@@ -74,7 +74,7 @@ class FaceSwapper:
         return codeformer_net
 
 # ตัวอย่างการใช้งาน:
-# swapper = FaceSwapper()
-# result = swapper.swap_face("/content/input.jpg", "/content/target.jpg", full_generate=True)
-# result.save("/content/output.jpg")
+swapper = FaceSwapper()
+result = swapper.swap_face("./30868.jpg", "./LINE_ALBUM_news_240702_1.jpg", full_generate=True)
+result.save("./output.jpg")
 
