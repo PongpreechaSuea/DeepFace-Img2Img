@@ -21,14 +21,14 @@ def check_ckpts():
         'realesrgan': 'https://github.com/sczhou/CodeFormer/releases/download/v0.1.0/RealESRGAN_x2plus.pth'
     }
     # download weights
-    if not os.path.exists('CodeFormer/CodeFormer/weights/CodeFormer/codeformer.pth'):
-        load_file_from_url(url=pretrain_model_url['codeformer'], model_dir='CodeFormer/CodeFormer/weights/CodeFormer', progress=True, file_name=None)
-    if not os.path.exists('CodeFormer/CodeFormer/weights/facelib/detection_Resnet50_Final.pth'):
-        load_file_from_url(url=pretrain_model_url['detection'], model_dir='CodeFormer/CodeFormer/weights/facelib', progress=True, file_name=None)
-    if not os.path.exists('CodeFormer/CodeFormer/weights/facelib/parsing_parsenet.pth'):
-        load_file_from_url(url=pretrain_model_url['parsing'], model_dir='CodeFormer/CodeFormer/weights/facelib', progress=True, file_name=None)
-    if not os.path.exists('CodeFormer/CodeFormer/weights/realesrgan/RealESRGAN_x2plus.pth'):
-        load_file_from_url(url=pretrain_model_url['realesrgan'], model_dir='CodeFormer/CodeFormer/weights/realesrgan', progress=True, file_name=None)
+    if not os.path.exists('./src/CodeFormer/CodeFormer/weights/CodeFormer/codeformer.pth'):
+        load_file_from_url(url=pretrain_model_url['codeformer'], model_dir='./src/CodeFormer/CodeFormer/weights/CodeFormer', progress=True, file_name=None)
+    if not os.path.exists('./src/CodeFormer/CodeFormer/weights/facelib/detection_Resnet50_Final.pth'):
+        load_file_from_url(url=pretrain_model_url['detection'], model_dir='./src/CodeFormer/CodeFormer/weights/facelib', progress=True, file_name=None)
+    if not os.path.exists('./src/CodeFormer/CodeFormer/weights/facelib/parsing_parsenet.pth'):
+        load_file_from_url(url=pretrain_model_url['parsing'], model_dir='./src/CodeFormer/CodeFormer/weights/facelib', progress=True, file_name=None)
+    if not os.path.exists('./src/CodeFormer/CodeFormer/weights/realesrgan/RealESRGAN_x2plus.pth'):
+        load_file_from_url(url=pretrain_model_url['realesrgan'], model_dir='./src/CodeFormer/CodeFormer/weights/realesrgan', progress=True, file_name=None)
     
     
 # set enhancer with RealESRGAN
