@@ -15,19 +15,19 @@ class FaceSwapper:
     def __init__(self):
         self.check_ckpts()
         self.providers = onnxruntime.get_available_providers()
-        self.face_analyser = self.getFaceAnalyser()
-        self.face_swapper = self.getFaceSwapModel()
+        # self.face_analyser = self.getFaceAnalyser()
+        # self.face_swapper = self.getFaceSwapModel()
         self.upsampler = self.set_realesrgan()
         self.device = self.set_device()
 
     def check_ckpts(self):
         check_ckpts()
 
-    def getFaceAnalyser(self):
-        return getFaceAnalyser(MODEL, self.providers)
+    # def getFaceAnalyser(self):
+    #     return getFaceAnalyser(MODEL, self.providers)
 
-    def getFaceSwapModel(self):
-        return getFaceSwapModel(MODEL_PATH)
+    # def getFaceSwapModel(self):
+    #     return getFaceSwapModel(MODEL_PATH)
 
     def set_realesrgan(self):
         return set_realesrgan()
@@ -40,7 +40,7 @@ class FaceSwapper:
         target_img = Image.open(target_source)
 
         if full_generate:
-            result_image = process(source_img, target_img, SOURCE_INDEXES, TARGET_INDEXES,self.face_swapper,self.face_analyser)
+            result_image = process(source_img, target_img, SOURCE_INDEXES, TARGET_INDEXES)
             codeformer_net = self.setup_codeformer()
 
             result_image = cv2.cvtColor(np.array(result_image), cv2.COLOR_RGB2BGR)
@@ -56,7 +56,7 @@ class FaceSwapper:
             )
             result_image = Image.fromarray(result_image)
         else:
-            result_image = process(source_img, target_img, SOURCE_INDEXES, TARGET_INDEXES,self.face_swapper,self.face_analyser)
+            result_image = process(source_img, target_img, SOURCE_INDEXES, TARGET_INDEXES)
 
         return result_image
 
