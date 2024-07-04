@@ -1,7 +1,7 @@
 import os
 
-MODEL = "./model/model_swap_face.onnx"
-MODEL_CODEFORMER = "./src/CodeFormer/CodeFormer/weights/CodeFormer/codeformer.pth"
+MODEL = "./checkpoints/model_swap_face.onnx"
+MODEL_CODEFORMER = os.path.abspath("./src/CodeFormer/CodeFormer/weights/CodeFormer/codeformer.pth")
 MODEL_PATH = os.path.join(os.path.abspath("./"), MODEL.replace("./", ""))
 
 FULL_GENERATE = True
