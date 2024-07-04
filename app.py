@@ -34,7 +34,7 @@ async def read_root(request: Request):
 async def swap_face(
     source: UploadFile = File(...),
     target: UploadFile = File(...),
-    full_generate: bool = False
+    full_generate: bool = True
 ):
     try:
         source_image = Image.open(io.BytesIO(await source.read()))

@@ -4,25 +4,31 @@ services:
   deepface-img2img:
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     image: deepface-img2img
     container_name: deepface-img2img
     ports:
-      - "3000:3000"
+      - "8000:8000"
     volumes:
       - ./src:/app/src
-      - ./model:/app/model
-      - ./utils:/app/utils
-      - ./assets:/app/assets
+      - ./checkpoints:/app/checkpoints
+      - ./:/app
     environment:
-      - MODEL=/app/model/model_swap_face.onnx
-      - MODEL_CODEFORMER=/app/src/CodeFormer/CodeFormer/weights/CodeFormer/codeformer.pth
+      - MODEL=./checkpoints/model_swap_face.onnx
+      - MODEL_CODEFORMER=./src/CodeFormer/CodeFormer/weights/CodeFormer/codeformer.pth
+      - MODEL_REALESRGANER=./src/CodeFormer/CodeFormer/weights/realesrgan/RealESRGAN_x2plus.pth
       - FULL_GENERATE=True
       - DIM_EMBD=512
       - CODEBOOK_SIZE=1024
       - N_HEAD=8
       - N_LAYERS=9
       - CONNECT_LIST=["32", "64", "128", "256"]
+      - RRDBNET_IN_CHANNELS=3
+      - RRDBNET_OUT_CHANNELS=3
+      - RRDBNET_GROW_CHANNELS=32
+      - RRDBNET_FEAT_NUM=64
+      - RRDBNET_BLOCK_NUM=23
+      - SCALE=2
       - SOURCE_INDEXES="-1"
       - TARGET_INDEXES="-1"
       - FACE_RESTORE=store_true
@@ -33,15 +39,13 @@ services:
       - SOURCE_PATH=temp_source.jpg
       - TARGET_PATH=temp_target.jpg
       - HOST=0.0.0.0
-      - PORT=3000
+      - PORT=8000
     command: python app.py
 
 volumes:
-  model_data:
   src_data:
-  utils_data:
-  assets_data:
+  checkpoints_data:
 
 # docker-compose up --build
-# docker-compose up --build -d # (ทำงานเบื้องหลัง)
+# docker-compose up --build -d
 # docker-compose down
