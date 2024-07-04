@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.append(os.path.abspath('./CodeFormer/CodeFormer'))
+sys.path.append(os.path.abspath('./src/CodeFormer/CodeFormer'))
 
 import onnxruntime
 import torch
@@ -40,7 +40,7 @@ class FaceSwapper:
         target_img = Image.open(target_source)
 
         if full_generate:
-            result_image = process(source_img, target_img, SOURCE_INDEXES, TARGET_INDEXES, MODEL)
+            result_image = process(source_img, target_img, SOURCE_INDEXES, TARGET_INDEXES,self.face_swapper,self.face_analyser)
             codeformer_net = self.setup_codeformer()
 
             result_image = cv2.cvtColor(np.array(result_image), cv2.COLOR_RGB2BGR)
@@ -56,7 +56,7 @@ class FaceSwapper:
             )
             result_image = Image.fromarray(result_image)
         else:
-            result_image = process(source_img, target_img, SOURCE_INDEXES, TARGET_INDEXES)
+            result_image = process(source_img, target_img, SOURCE_INDEXES, TARGET_INDEXES,self.face_swapper,self.face_analyser)
 
         return result_image
 
@@ -74,8 +74,8 @@ class FaceSwapper:
         codeformer_net.eval()
         return codeformer_net
 
-# ตัวอย่างการใช้งาน:
-swapper = FaceSwapper()
-result = swapper.swap_face("./30868.jpg", "./LINE_ALBUM_news_240702_1.jpg", full_generate=True)
-result.save("./output.jpg")
+# # ตัวอย่างการใช้งาน:
+# swapper = FaceSwapper()
+# result = swapper.swap_face("./30868.jpg", "./LINE_ALBUM_news_240702_1.jpg", full_generate=True)
+# result.save("./output.jpg")
 
