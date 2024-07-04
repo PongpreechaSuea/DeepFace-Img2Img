@@ -12,6 +12,8 @@ from basicsr.archs.rrdbnet_arch import RRDBNet
 from basicsr.utils.realesrgan_utils import RealESRGANer
 from basicsr.utils.registry import ARCH_REGISTRY
 
+from src.config import MODEL_REALESRGANER, RRDBNET_IN_CHANNELS, RRDBNET_OUT_CHANNELS, \
+    RRDBNET_FEAT_NUM , RRDBNET_BLOCK_NUM, RRDBNET_GROW_CHANNELS, SCALE
 
 def check_ckpts():
     pretrain_model_url = {
@@ -35,16 +37,16 @@ def check_ckpts():
 def set_realesrgan():
     half = True if torch.cuda.is_available() else False
     model = RRDBNet(
-        num_in_ch=3,
-        num_out_ch=3,
-        num_feat=64,
-        num_block=23,
-        num_grow_ch=32,
-        scale=2,
+        num_in_ch=RRDBNET_IN_CHANNELS,
+        num_out_ch=RRDBNET_OUT_CHANNELS,
+        num_feat=RRDBNET_FEAT_NUM,
+        num_block=RRDBNET_BLOCK_NUM,
+        num_grow_ch=RRDBNET_GROW_CHANNELS,
+        scale=SCALE,
     )
     upsampler = RealESRGANer(
-        scale=2,
-        model_path="CodeFormer/CodeFormer/weights/realesrgan/RealESRGAN_x2plus.pth",
+        scale=SCALE,
+        model_path=MODEL_REALESRGANER,
         model=model,
         tile=400,
         tile_pad=40,
