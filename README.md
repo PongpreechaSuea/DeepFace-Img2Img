@@ -2,6 +2,9 @@
 
 DeepFace-Img2Img is a specialized project dedicated to face swapping within images. It operates by taking a source image and a target image, and seamlessly swapping the faces between the two. This service utilizes advanced deep learning techniques to ensure high-quality and realistic results. The primary focus of the project is to provide an easy and efficient way to swap faces in photos, making it ideal for entertainment, personal projects, or research purposes. With a user-friendly interface and powerful backend, DeepFace-Img2Img simplifies the process of face swapping, delivering impressive outcomes with minimal effort.
 
+Access the Colab Notebook for examples and further learning [Colab Notebook](https://colab.research.google.com/drive/1cJGRSdM8j7WJ3WrXcQ2ESiTxGHW0SG5I?usp=sharing)
+
+
 ## Features
 
 - Face swapping from uploaded images

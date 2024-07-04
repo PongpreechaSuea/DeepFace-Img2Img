@@ -1,27 +1,48 @@
 pillow>=9.5.0
 protobuf>=4.23.2
-addict==2.4.0
-future==1.0.0
-lmdb==1.5.1
-numpy==1.26.4
-opencv-python==4.10.0.84
-pyyaml==6.0.1
-requests==2.32.3
+addict
+future
+lmdb
+numpy
+opencv-python
 Pillow
-scikit-image==0.24.0
-scipy==1.13.1
-tb-nightly==2.18.0a20240701
+pyyaml
+requests
+scikit-image
+scipy
+tb-nightly
 torch>=1.7.1
-torchvision==0.9.0
-tqdm==4.66.4
-yapf==0.3.1
+torchvision
+tqdm
+yapf
 lpips
-onnxruntime==1.18.1
-urllib3==2.2.2
-fastapi==0.111.0
-uvicorn==0.30.1
-pydub==0.25.1
-jinja2
-basicsr
-gdown
-# insightface==0.7.3
+insightface>=0.7.3
+onnxruntime
+
+# pillow>=9.5.0
+# protobuf>=4.23.2
+# addict==2.4.0
+# future==1.0.0
+# lmdb==1.5.1
+# numpy==1.26.4
+# opencv-python==4.10.0.84
+# pyyaml==6.0.1
+# requests==2.32.3
+# Pillow
+# scikit-image==0.24.0
+# scipy==1.13.1
+# tb-nightly==2.18.0a20240701
+# torch>=1.7.1
+# torchvision==0.9.0
+# tqdm==4.66.4
+# yapf==0.3.1
+# lpips
+# onnxruntime==1.18.1
+# urllib3==2.2.2
+# fastapi==0.111.0
+# uvicorn==0.30.1
+# pydub==0.25.1
+# jinja2
+# basicsr
+# gdown
+# # insightface==0.7.3
