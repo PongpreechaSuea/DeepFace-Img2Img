@@ -1,6 +1,3 @@
-import sys
-sys.path.append('./CodeFormer/CodeFormer')
-
 import os
 import cv2
 import torch

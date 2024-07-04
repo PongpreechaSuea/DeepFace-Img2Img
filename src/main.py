@@ -1,5 +1,6 @@
+import os
 import sys
-sys.path.append('./CodeFormer/CodeFormer')
+sys.path.append(os.path.abspath('./CodeFormer/CodeFormer'))
 
 import onnxruntime
 import torch
