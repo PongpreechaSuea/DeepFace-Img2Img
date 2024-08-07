@@ -134,8 +134,21 @@ docker-compose up --build
 
 This will build the image and start the container, mapping port 8000 on your host to port 8000 in the container.
 
-## Example Output
+## Example
 
-<p align="center">
-  <img src="./images/example_output.jpg" alt="Example Output" width="750"/>
-</p>
+<!-- <p align="center">
+    <img src="./assets/results4.png" alt="Example Output" width="300"/>
+    <img src="./assets/results4.png" alt="Example Output" width="300"/>
+    <img src="./assets/results4.png" alt="Example Output" width="300"/>
+</p> -->
+
+
+## Example
+
+| Input |  | Output |
+|:-----:|:-----:|:------:|
+| Source Image | Target Image | Result |
+| <img src="./assets/image3.jpg" alt="Source Image" width="250"/> | <img src="./assets/image1.jpg" alt="Target Image" width="250"/> | <img src="./assets/results1.png" alt="Result Image" width="250"/> |
+| <img src="./assets/image5.jpg" alt="Source Image" width="250"/> | <img src="./assets/image3.jpg" alt="Target Image" width="250"/> | <img src="./assets/results2.png" alt="Result Image" width="250"/> |
+| <img src="./assets/image5.jpg" alt="Source Image" width="250"/> | <img src="./assets/image2.jpg" alt="Target Image" width="250"/> | <img src="./assets/results3.png" alt="Result Image" width="250"/> |
+| <img src="./assets/image6.jpg" alt="Source Image" width="250"/> | <img src="./assets/image7.jpg" alt="Target Image" width="250"/> | <img src="./assets/results4.png" alt="Result Image" width="250"/> |
