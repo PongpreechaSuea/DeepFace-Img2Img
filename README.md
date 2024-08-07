@@ -136,15 +136,6 @@ This will build the image and start the container, mapping port 8000 on your hos
 
 ## Example
 
-<!-- <p align="center">
-    <img src="./assets/results4.png" alt="Example Output" width="300"/>
-    <img src="./assets/results4.png" alt="Example Output" width="300"/>
-    <img src="./assets/results4.png" alt="Example Output" width="300"/>
-</p> -->
-
-
-## Example
-
 | Input |  | Output |
 |:-----:|:-----:|:------:|
 | Source Image | Target Image | Result |
